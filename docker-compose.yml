@@ -1,0 +1,24 @@
+ervices:
+ app-votacao:
+ build: .
+ ports:
+ - "5000:5000"
+ networks:
+ - devops-net
+ prometheus:
+ image: prom/prometheus:latest
+ volumes:
+ - ./prometheus.yml:/etc/prometheus/prometheus.yml
+ ports:
+ - "9090:9090"
+ networks:
+ - devops-net
+ grafana:
+ image: grafana/grafana:latest
+ ports:
+ - "3000:3000"
+ networks:
+ - devops-net
+networks:
+ devops-net:
+ driver: bridge
